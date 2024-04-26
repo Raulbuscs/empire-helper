@@ -1,0 +1,70 @@
+{
+  "name": "EmpireTrader",
+  "description": "Helping the traders on csgoempire.com",
+  "version": "0.1.0",
+  "author": "TG",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/ico/empire-logo.jpg",
+    "32": "assets/ico/empire-logo.jpg",
+    "48": "assets/ico/empire-logo.jpg",
+    "128": "assets/ico/empire-logo.jpg"
+  },
+  "background": {
+    "service_worker": "assets/js/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.csgoroll.com/*",
+        "https://www.csgoroll.gg/*",
+        "https://www.csgorolltr.com/*"
+      ],
+      "js": ["assets/js/content.js"]
+    },
+    {
+      "matches": [
+        "https://csgoempire.com/deposit/steam?app=730"
+      ],
+      "js": ["assets/js/deposit.js"],
+      "css": ["assets/css/depositPage.css"]
+    },
+    {
+      "matches": [
+        "https://csgoempire.com/withdraw/steam/market"
+      ],
+      "js": ["assets/js/withdraw.js"],
+      "css": ["assets/css/depositPage.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "assets/popup/popup.html",
+    "scripts": [
+        "assets/popup/popup.js"],
+    "default_icon": {
+      "16": "assets/ico/empire-logo.ico"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "unlimitedStorage",
+    "scripting",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.csgoempire.com/*",
+    "https://prices.csgotrader.app/latest/prices_v6.json"
+  ]
+}
