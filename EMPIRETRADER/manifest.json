@@ -27,6 +27,12 @@
   "content_scripts": [
     {
       "matches": [
+        "https://steamcommunity.com/*"
+      ],
+      "js": ["assets/js/webapi.js"]
+    },
+    {
+      "matches": [
         "https://csgoempire.com/*"
       ],
       "js": ["assets/js/content.js"]

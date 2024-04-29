@@ -63,3 +63,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 });
+
+// Listen for messages from content scripts
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.type === 'page_data') {
+      // Store the data in a variable or send it to the popup
+      chrome.storage.local.set({ 'webAPI': message.data });
+    }
+});

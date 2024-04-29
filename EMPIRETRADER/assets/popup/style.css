@@ -24,6 +24,18 @@ body {
     margin: 3px;
 }
 
+.webAPI-field {
+    width: 100%;
+    margin: 8px 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Align text at the top to allow wrapping */
+    justify-content: flex-start; /* Ensure elements are not centered */
+    color: white;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
 .rollbtn{
     font-family:"Flama,Roboto,Helvetica Neue,sans-serif" !important;
     color: white !important;

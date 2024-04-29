@@ -317,39 +317,38 @@ function setBuffValue(item) {
             let nameArr = skin.split(' ')
             let f = nameArr[0]
             let s = nameArr[1]
+            let gem = nameArr[nameArr.length - 1]
 
-
-            // broken code need to fix
-            /*
+          
             // if doppler has a phase
-            if (f == 'Doppler'){
+            if ((f == 'Doppler') && (gem !== 'Ruby') && (gem !== 'Sapphire')) {
+                console.log(gem)
                 itemInfo.skinName = 'Doppler'
                 itemName += " | " + 'Doppler'
-                var phase = s + ' ' + nameArr[2]
+                var phase = s + ' ' + nameArr[2] + ' ' + nameArr[3]
             }
 
             // if doppler is a gem
-            else if ((nameArr.length === 1) && (f == 'Ruby' || f == 'Sapphire')){
+            else if ((f == 'Doppler') && (gem == 'Ruby' || gem == 'Sapphire')){
                 itemInfo.skinName = f
                 itemName += " | " + 'Doppler'
                 if (s == 'Pearl') phase = skin
-                else var phase = f
+                else var phase = '- ' + gem
             }
             
             // if doppler is a gamma doppler
-            else if (f == 'Gamma' && s == 'Doppler'){
+            else if ((f == 'Gamma' && s == 'Doppler') && gem !== 'Emerald'){
                 itemInfo.skinName = f + ' ' + s
                 itemName += " | " + 'Gamma Doppler'
-                var phase = nameArr[2] + ' ' + nameArr[3]
+                var phase = nameArr[2] + ' ' + nameArr[3] + ' ' + nameArr[4]
             }
             
             // if gamma doppler is a gem -> emerald
-            else if ((nameArr.length === 1) && f == 'Emerald'){
-                itemInfo.skinName = f
+            else if ((f == 'Gamma' && s == 'Doppler') && gem == 'Emerald'){
+                itemInfo.skinName = gem
                 itemName += " | " + 'Gamma Doppler'
-                var phase = 'Emerald'
+                var phase = '- Emerald'
             }
-            */
 
             //if item is case / pin -> not every item is added yet
             if (itemInfo.skinWeapon.includes('Case') ||
@@ -359,9 +358,9 @@ function setBuffValue(item) {
 
             else if (!skin) {
                 // continue
-            }
-
-            else{
+            } else if (phase !== undefined) {
+                // continue
+            } else {
                 itemInfo.skinName = skin
                 itemName += " | " + skin
             }
@@ -370,6 +369,9 @@ function setBuffValue(item) {
 
     // skin exterior (for selectable)
     let exterior = item.querySelector("p.size-small.font-bold").innerHTML.trim()
+    if (exterior == itemInfo.skinWeapon) {
+        exterior = item.querySelector("p.size-xs.font-bold.flex-shrink-0.uppercase").innerHTML.trim()
+    }
     console.log('exterior: ', exterior)
 
     if (isSticker){
@@ -389,14 +391,12 @@ function setBuffValue(item) {
     }
 
     else{
-        // if ("Doppler" in itemName){
-        //     itemName += " (" + exterior + ")";
-        //     console.log(itemName)
-        // } else {
-        //     itemName += " (" + exterior + ")";
-        //     console.log(itemName)
-        // }
-        itemName += " (" + exterior + ")";
+        if (phase !== undefined){
+            console.log(phase)
+            itemName += " (" + exterior + ") "+ phase + "";
+        } else {
+            itemName += " (" + exterior + ")";
+        }
         console.log(itemName)
     }
 
